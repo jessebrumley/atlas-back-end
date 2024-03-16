@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+""" Script using REST API """
 import requests
 import sys
 
