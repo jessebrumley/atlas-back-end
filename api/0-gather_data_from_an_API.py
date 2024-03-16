@@ -22,36 +22,25 @@ def get_employee_todo(employee_id):
     employee_name = employee_info.get('name')
     todo_list = requests.get(f"{todo_ext}?userId={user_ext}").json()
 
-    # Checking if the request was successful
-    response = requests.get(
-    'https://jsonplaceholder.typicode.com/users/{employee_id}'
-    )
-    if response.status_code == 200:
-        todos = response.json()
+    # Counting the number of completed tasks
+    completed_tasks = []
+    for task in todo_list:
+        if task["completed"]:
+            completed_tasks.append(task["title"])
 
-        # Counting the number of completed tasks
-        completed_tasks = []
-        for task in todo_list:
-            if task["completed"]:
-                completed_tasks.append(task["title"])
+    # Counting the totals of tasks and tasks done
+    total_todo = len(todo_list)
+    total_done = len(completed_tasks)
 
-        # Counting the totals of tasks and tasks done
-        total_todo = len(todo_list)
-        total_done = len(completed_tasks)
+    # Displaying the employee TODO list progress
+    print(
+        f"Employee {employee_name} is done with tasks("
+        f"{total_done}/{total_todo}):"
+        )
 
-        # Displaying the employee TODO list progress
-        print(
-            f"Employee {employee_name} is done with tasks("
-            f"{total_done}/{total_todo}):"
-            )
-
-        # Displaying the titles of completed tasks
-        for completed_task in completed_tasks:
-            print(f"\t {completed_task}")
-    else:
-        print(f"Error: Failed to retrieve TODO list for ID {employee_id}.")
-
-# test
+    # Displaying the titles of completed tasks
+    for completed_task in completed_tasks:
+        print(f"\t {completed_task}")
 
 
 if __name__ == "__main__":
