@@ -29,7 +29,7 @@ def get_todos(employee_id):
                 completed_tasks.append(task["title"])
         total_done = len(completed_tasks)
         total_todo = len(todo_list)
-        
+
         return (total_done, total_todo, completed_tasks)
     return []
 
