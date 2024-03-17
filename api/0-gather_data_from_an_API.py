@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """Script using REST API to fetch user name and todo list."""
 import requests
 import sys
