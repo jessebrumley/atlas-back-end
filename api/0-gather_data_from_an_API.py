@@ -45,8 +45,3 @@ def get_employee_todo(employee_id):
     completed_tasks = todos[2]
     for completed_task in completed_tasks:
         print(f"\t {completed_task}")
-
-
-if __name__ == "__main__":
-    employee_id = int(sys.argv[1])
-    get_employee_todo(employee_id)
