@@ -2,7 +2,6 @@
 """Script using REST API to fetch user name and todo list."""
 import requests
 import sys
-import json
 
 
 def get_name(employee_id):
