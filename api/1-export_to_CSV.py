@@ -46,18 +46,13 @@ def get_todos(employee_id):
 
 
 def export_to_csv(employee_id, name, tasks):
-    """Exports the task data to a CSV file."""
+    """Exports the task data to a CSV file without a header row."""
     filename = f"{employee_id}.csv"
     with open(filename, 'w', newline='') as csvfile:
-        fieldnames = ["USER_ID", "USERNAME",
-                      "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         for task in tasks:
-            writer.writerow({"USER_ID": employee_id, "USERNAME": name,
-                             "TASK_COMPLETED_STATUS": "Completed"
-                             if task["completed"] else "Incomplete",
-                             "TASK_TITLE": task["title"]})
+            row = f'"{employee_id}","{name}","{"True" if task["completed"] else "False"}","{task["title"]}"\n'
+            csvfile.write(row)
+
 
 
 def get_employee_todo(employee_id):
