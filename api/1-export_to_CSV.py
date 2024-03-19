@@ -41,7 +41,6 @@ def export_to_csv(employee_id, name, tasks):
                       "TASK_COMPLETED_STATUS", "TASK_TITLE"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-        writer.writeheader()
         for task in tasks:
             writer.writerow({"USER_ID": employee_id, "USERNAME": name,
                              "TASK_COMPLETED_STATUS": "Completed"
