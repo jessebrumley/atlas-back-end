@@ -18,6 +18,18 @@ def get_name(employee_id):
     return ('Failed to fetch name')
 
 
+def get_username(employee_id):
+    """Fetches the username of the employee by ID."""
+    url = "https://jsonplaceholder.typicode.com/users/"
+    response = requests.get(url, params={'id': employee_id})
+    if response.status_code == 200:
+        users = response.json()
+        for user in users:
+            if user['id'] == employee_id:
+                return user.get('username', 'No username found')
+    return ('Failed to fetch name')
+
+
 def get_todos(employee_id):
     """Fetches list of employees by ID and returns
     a list of tasks with their completion status."""
@@ -53,11 +65,12 @@ def get_employee_todo(employee_id):
     of a todo list by ID and exports to CSV."""
     name = get_name(employee_id)
     tasks = get_todos(employee_id)
+    username = get_username(employee_id)
     print(f"Employee {name} has {len(tasks)} tasks:")
     for task in tasks:
         print(f"\t {task['title']} - "
               f"{'Completed' if task['completed'] else 'Incomplete'}")
-    export_to_csv(employee_id, name, tasks)
+    export_to_csv(employee_id, username, tasks)
 
 
 if __name__ == "__main__":
