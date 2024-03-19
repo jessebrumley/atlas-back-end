@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 """Script using REST API to fetch user name and todo list and export to CSV."""
+import csv
 import requests
 import sys
-import csv
 
 
 def get_name(employee_id):
