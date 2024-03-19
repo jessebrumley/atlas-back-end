@@ -1,6 +1,9 @@
-import requests
-import json
+#!/usr/bin/python3
 
+"""Script using REST API to fetch user name and todo list."""
+import json
+import requests
+import sys
 
 def get_name(employee_id):
     url = "https://jsonplaceholder.typicode.com/users/"
