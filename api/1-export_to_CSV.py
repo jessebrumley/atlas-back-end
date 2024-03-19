@@ -50,9 +50,10 @@ def export_to_csv(employee_id, name, tasks):
     filename = f"{employee_id}.csv"
     with open(filename, 'w', newline='') as csvfile:
         for task in tasks:
-            row = f'"{employee_id}","{name}","{"True" if task["completed"] else "False"}","{task["title"]}"\n'
+            row = (f'"{employee_id}","{name}","'
+                   f'{"True" if task["completed"] else "False"}",'
+                   f'"{task["title"]}"\n')
             csvfile.write(row)
-
 
 
 def get_employee_todo(employee_id):
