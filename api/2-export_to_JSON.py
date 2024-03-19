@@ -41,7 +41,7 @@ def get_employee_todo(employee_id):
     if tasks:
         data = {str(employee_id): tasks}
         with open(f"{employee_id}.json", "w") as outfile:
-            json.dump(data, outfile, indent=0)
+            json.dump(data, outfile, indent=None)
 
 
 if __name__ == "__main__":
