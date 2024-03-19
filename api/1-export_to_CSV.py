@@ -5,6 +5,7 @@ import requests
 import sys
 import csv
 
+
 def get_name(employee_id):
     """Fetches the name of the employee by ID."""
     url = "https://jsonplaceholder.typicode.com/users/"
@@ -15,6 +16,7 @@ def get_name(employee_id):
             if user['id'] == employee_id:
                 return user.get('name', 'No name found')
     return ('Failed to fetch name')
+
 
 def get_todos(employee_id):
     """Fetches list of employees by ID."""
@@ -32,19 +34,24 @@ def get_todos(employee_id):
         return (total_done, total_todo, completed_tasks)
     return []
 
+
 def export_to_csv(employee_id, name, completed_tasks):
     """Exports the task data to a CSV file."""
     filename = f"{employee_id}.csv"
     with open(filename, 'w', newline='') as csvfile:
-        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
+                      "TASK_TITLE"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         writer.writeheader()
         for task in completed_tasks:
-            writer.writerow({"USER_ID": employee_id, "USERNAME": name, "TASK_COMPLETED_STATUS": "Completed", "TASK_TITLE": task})
+            writer.writerow({"USER_ID": employee_id, "USERNAME": name,
+                             "TASK_COMPLETED_STATUS": "Completed",
+                             "TASK_TITLE": task})
+
 
 def get_employee_todo(employee_id):
-    """Fetches a user's total, completed, and titles of a todo list by ID and exports to CSV."""
+    """Fetches a user's todo list by ID and exports to CSV."""
     name = get_name(employee_id)
     todos = get_todos(employee_id)
     print(
@@ -55,6 +62,7 @@ def get_employee_todo(employee_id):
     for completed_task in completed_tasks:
         print(f"\t {completed_task}")
     export_to_csv(employee_id, name, completed_tasks)
+
 
 if __name__ == "__main__":
     employee_id = int(sys.argv[1])
